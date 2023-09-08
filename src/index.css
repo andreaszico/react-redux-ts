@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    /* font-family: 'Roboto', sans-serif; */
+}
+
+.bg-primary{
+    @apply bg-green-600;
+}
