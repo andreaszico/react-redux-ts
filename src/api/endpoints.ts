@@ -1,3 +1,3 @@
 export const endpoint: { [key: string]: string } = {
-    login: "login",
+    login: "/login",
 };

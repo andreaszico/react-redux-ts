@@ -1,10 +1,11 @@
 import { Button } from "@atoms/buttons";
 import { Input } from "@atoms/inputs";
-import { FC, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import loginImage from "@assets/images/login.png";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
 import { AppDispatch } from "@app/store";
 import { onNextStage } from "../store/slice";
+import { login } from "../store/thunk";
 
 export const loginRoute = "/login";
 
@@ -15,16 +16,15 @@ export const Login: FC = () => {
   const inputUsernameRef = useRef<HTMLInputElement>(null);
   const inputPasswordRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    console.log("CHECK");
+  }, [state.success]);
+
   const handleClick = () => {
     const username = inputUsernameRef.current?.value;
     const password = inputPasswordRef.current?.value;
 
-    dispatch(
-      onNextStage({
-        username: username,
-        password: password,
-      })
-    );
+    dispatch(login({ username: username, password: password }));
   };
 
   return (

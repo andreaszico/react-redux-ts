@@ -1,5 +1,5 @@
-export type ResponseApi = {
+export type ResponseApi<T> = {
     success: boolean,
-    data: any,
+    data: T,
     message: string,
 }
