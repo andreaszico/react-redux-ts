@@ -28,6 +28,7 @@
       "@api/*": ["src/api/*"],
       "@services/*": ["src/services/*"],
       "@domain/*": ["src/domain/*"],
+      "@shared/*": ["src/shared/*"],
       "@features/*": ["src/features/*"],
       "@atoms/*": ["src/components/atoms/*"],
       "@moleculs/*": ["src/components/moleculs/*"],
