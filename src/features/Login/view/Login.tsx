@@ -4,8 +4,10 @@ import { FC, useEffect, useRef } from "react";
 import loginImage from "@assets/images/login.png";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
 import { AppDispatch } from "@app/store";
-import { onNextStage } from "../store/slice";
 import { login } from "../store/thunk";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { dashboardRouteName } from "@features/Dashboard/view/Dashboard";
+import Loading from "@atoms/loading";
 
 export const loginRoute = "/login";
 
@@ -15,9 +17,13 @@ export const Login: FC = () => {
 
   const inputUsernameRef = useRef<HTMLInputElement>(null);
   const inputPasswordRef = useRef<HTMLInputElement>(null);
+  const navigate: NavigateFunction = useNavigate();
 
   useEffect(() => {
     console.log("CHECK");
+    if (state.success) {
+      navigate(dashboardRouteName);
+    }
   }, [state.success]);
 
   const handleClick = () => {
@@ -27,7 +33,9 @@ export const Login: FC = () => {
     dispatch(login({ username: username, password: password }));
   };
 
-  return (
+  return state.isLoading ? (
+    <Loading />
+  ) : (
     <div className="flex flex-col h-screen w-screen p-5">
       <div className="flex">
         <p className="text-3xl font-semibold text-primary">

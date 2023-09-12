@@ -1,4 +1,4 @@
-import { LoginRequest } from "@domain/entity/auth/login";
+import { LoginRequest, LoginResponse } from "@domain/entity/auth/login";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { login } from "./thunk";
 import { AxiosError } from "axios";
@@ -34,8 +34,8 @@ const loginScreen = createSlice({
         state.error = action.payload;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.success = true;
+        state.isLoading = false;
         setToStorage(action.payload);
       });
   },
@@ -43,8 +43,6 @@ const loginScreen = createSlice({
 
 async function setToStorage(data: any) {
   zStorage.setItem(ZStorage.accessTokenKey, JSON.stringify(data));
-  const arr: any = await zStorage.getItem(ZStorage.accessTokenKey);
-  console.log(arr);
 }
 
 export const { onNextStage } = loginScreen.actions;

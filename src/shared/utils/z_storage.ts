@@ -1,5 +1,3 @@
-import StringEncryptor from "./z_enryptor";
-
 class ZStorage {
   private static instance: ZStorage;
   static readonly accessTokenKey: string = "accessToken";
@@ -17,10 +15,7 @@ class ZStorage {
     try {
       const storedItem = localStorage.getItem(item);
       if (storedItem !== null) {
-        const encryptedText = await StringEncryptor.decrypt(
-            storedItem
-        );
-        return JSON.parse(encryptedText);
+        return JSON.parse(storedItem);
       }
       return null;
     } catch (error) {
@@ -29,13 +24,9 @@ class ZStorage {
     }
   }
 
-  async setItem<T>(item: string, value: T): Promise<void> {
+  async setItem<T>(item: string, value: string): Promise<void> {
     try {
-      const encryptedText = await StringEncryptor.encrypt(
-        JSON.stringify(value)
-      );
-
-      localStorage.setItem(item, encryptedText);
+      localStorage.setItem(item, value);
     } catch (error) {
       console.error("Error setting item in localStorage:", error);
     }
@@ -44,11 +35,3 @@ class ZStorage {
 
 export default ZStorage;
 
-// Usage
-// const zStorage = ZStorage.getInstance();
-
-// Get the access token
-// const accessToken = zStorage.getItem<string>(ZStorage.accessTokenKey);
-
-// Set a new access token
-// zStorage.setItem(ZStorage.accessTokenKey, "newAccessToken");
