@@ -3,13 +3,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import ZStorage from "@shared/utils/z_storage";
 import { AxiosError } from "axios";
 
-const zStorage = ZStorage.getInstance();
-
 export const getInitialUser = createAsyncThunk(
   "getInitialUser",
   async (_, { rejectWithValue }) => {
     try {
-      const accessToken = await zStorage.getItem<LoginResponse>(
+      const accessToken = await ZStorage.getItem<LoginResponse>(
         ZStorage.accessTokenKey
       );
 

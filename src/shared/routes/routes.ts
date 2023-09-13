@@ -2,9 +2,9 @@ import {
   Dashboard,
   dashboardRouteName,
 } from "@features/Dashboard/view/Dashboard";
-import { Login } from "@features/Login/view/Login";
+import { Login, loginRouteName } from "@features/Login/view/Login";
 import { SplashScreen } from "@features/SplashScreen/view/SplashScreen";
-import Storage, { storageRoutName } from "@features/Storage/view/Storage";
+import Storage, { storageRouteName } from "@features/Storage/view/Storage";
 import { createBrowserRouter } from "react-router-dom";
 
 export const routers = createBrowserRouter([
@@ -14,7 +14,7 @@ export const routers = createBrowserRouter([
     children: [],
   },
   {
-    path: storageRoutName,
+    path: storageRouteName,
     Component: Storage,
   },
   {
@@ -23,7 +23,7 @@ export const routers = createBrowserRouter([
     children: [],
   },
   {
-    path: "/login",
+    path: loginRouteName,
     Component: Login,
   },
 ]);

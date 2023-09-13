@@ -11,7 +11,7 @@ class ZStorage {
     return ZStorage.instance;
   }
 
-  async getItem<T>(item: string): Promise<T | null> {
+  static async getItem<T>(item: string): Promise<T | null> {
     try {
       const storedItem = localStorage.getItem(item);
       if (storedItem !== null) {
@@ -24,7 +24,7 @@ class ZStorage {
     }
   }
 
-  async setItem<T>(item: string, value: string): Promise<void> {
+  static async setItem(item: string, value: string): Promise<void> {
     try {
       localStorage.setItem(item, value);
     } catch (error) {

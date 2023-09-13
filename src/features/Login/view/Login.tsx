@@ -9,7 +9,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { dashboardRouteName } from "@features/Dashboard/view/Dashboard";
 import Loading from "@atoms/loading";
 
-export const loginRoute = "/login";
+export const loginRouteName = "/login";
 
 export const Login: FC = () => {
   const state = useAppSelector((state) => state.loginScreenState);
@@ -20,7 +20,6 @@ export const Login: FC = () => {
   const navigate: NavigateFunction = useNavigate();
 
   useEffect(() => {
-    console.log("CHECK");
     if (state.success) {
       navigate(dashboardRouteName);
     }

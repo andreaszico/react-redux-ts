@@ -1,10 +1,8 @@
-import { LoginRequest, LoginResponse } from "@domain/entity/auth/login";
+import { LoginRequest } from "@domain/entity/auth/login";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { login } from "./thunk";
 import { AxiosError } from "axios";
 import ZStorage from "@shared/utils/z_storage";
-
-const zStorage = ZStorage.getInstance();
 
 export interface LoginScreenState {
   isLoading: boolean;
@@ -42,7 +40,7 @@ const loginScreen = createSlice({
 });
 
 async function setToStorage(data: any) {
-  zStorage.setItem(ZStorage.accessTokenKey, JSON.stringify(data));
+  ZStorage.setItem(ZStorage.accessTokenKey, JSON.stringify(data));
 }
 
 export const { onNextStage } = loginScreen.actions;
