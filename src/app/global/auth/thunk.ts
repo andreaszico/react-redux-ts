@@ -10,7 +10,7 @@ export const getInitialUser = createAsyncThunk(
       const accessToken = await ZStorage.getItem<LoginResponse>(
         ZStorage.accessTokenKey
       );
-
+      
       if (accessToken) {
         const loginResponse = accessToken;
         return loginResponse.user;
