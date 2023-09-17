@@ -5,7 +5,6 @@ import { env } from "@shared/config/configs";
 class StringEncryptor {
   static encrypt(plainText: string): string {
     const encrypt = AES.encrypt(plainText, env.SECRET_KEY!).toString();
-
     return encrypt;
   }
 

@@ -1,6 +1,4 @@
-import { LoginResponse } from "@domain/entity/auth/login";
 import { createSlice } from "@reduxjs/toolkit";
-import ZStorage from "@shared/utils/z_storage";
 import { getInitialUser } from "./thunk";
 import { User } from "@domain/base/user/user";
 
@@ -10,7 +8,6 @@ export interface AuthenticationState {
   success: boolean;
   user: User | null;
 }
-const zStorage = ZStorage.getInstance();
 
 const initialState: AuthenticationState = {
   isLoading: false,
