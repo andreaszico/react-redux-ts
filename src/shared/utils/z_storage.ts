@@ -13,11 +13,11 @@ class ZStorage {
     return ZStorage.instance;
   }
 
-  static async getItem<T>(item: string): Promise<T | null> {
+  static getItem<T>(item: string): T | null {
     try {
       const storedItem = localStorage.getItem(item);
-      const decrypt = StringEncryptor.decrypt(storedItem!);
       if (storedItem !== null) {
+        const decrypt = StringEncryptor.decrypt(storedItem!);
         return decrypt;
       }
       return null;

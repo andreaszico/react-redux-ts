@@ -1,22 +1,18 @@
-import '@app/global/extension/string/string-extensions'
-
-import { getInitialUser } from "@app/global/auth/thunk";
+import "@app/global/extension/string/string-extensions";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
 import { AppDispatch } from "@app/store";
+import { useUser } from "@organisms/layout/PrivateLayout";
 import { FC, useEffect } from "react";
 
 export const dashboardRouteName = "/dashboard";
 
 export const Dashboard: FC = () => {
   const { message } = useAppSelector((state) => state.dashboardState);
-  const { user } = useAppSelector((state) => state.authState);
-
+  const { user } = useUser();
   const dispatch: AppDispatch = useAppDispatch();
+
   useEffect(() => {
-    dispatch(getInitialUser());
-    
-    return () => {
-    };
+    return () => {};
   }, []);
 
   return (

@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getInitialUser } from "./thunk";
 import { User } from "@domain/base/user/user";
+import ZStorage from "@shared/utils/z_storage";
+import { LoginResponse } from "@domain/entity/auth/login";
 
 export interface AuthenticationState {
   isLoading: boolean;
@@ -33,6 +35,11 @@ const Authentication = createSlice({
       });
   },
 });
+
+export const checkAuth = (): LoginResponse | null => {
+  const user = ZStorage.getItem<LoginResponse>(ZStorage.accessTokenKey);
+  return user ? user : null;
+};
 
 export const {} = Authentication.actions;
 
