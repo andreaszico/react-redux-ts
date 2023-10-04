@@ -4,6 +4,9 @@ import { FC, useEffect } from "react";
 import { setSplash } from "../store/slice";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import landingPage from "@assets/images/landing_page.png";
+import { LoginResponse } from "@domain/entity/auth/login";
+import { checkAuth } from "@app/global/auth/authenticationSlice";
+import { dashboardRouteName } from "@features/Dashboard/view/Dashboard";
 
 export const SplashScreen: FC = () => {
   const state = useAppSelector((state) => state.splashScreenState);
@@ -11,13 +14,19 @@ export const SplashScreen: FC = () => {
 
   const navigate: NavigateFunction = useNavigate();
 
+  const user: LoginResponse | null = checkAuth();
+
   useEffect(() => {
     const splash = setTimeout(() => {
       dispatch(setSplash());
     }, 3000);
 
     if (state.splash) {
-      navigate("/login");
+      if (!user) {
+        navigate("/login");
+      } else {
+        navigate(dashboardRouteName);
+      }
     }
 
     return () => {

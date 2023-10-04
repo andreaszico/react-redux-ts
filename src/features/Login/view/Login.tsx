@@ -8,6 +8,8 @@ import { login } from "../store/thunk";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { dashboardRouteName } from "@features/Dashboard/view/Dashboard";
 import Loading from "@atoms/loading";
+import { LoginResponse } from "@domain/entity/auth/login";
+import { checkAuth } from "@app/global/auth/authenticationSlice";
 
 export const loginRouteName = "/login";
 
@@ -18,10 +20,16 @@ export const Login: FC = () => {
   const inputUsernameRef = useRef<HTMLInputElement>(null);
   const inputPasswordRef = useRef<HTMLInputElement>(null);
   const navigate: NavigateFunction = useNavigate();
+  const user: LoginResponse | null = checkAuth();
 
   useEffect(() => {
+    if(user){
+      navigate(dashboardRouteName);
+      return;
+    }
     if (state.success) {
       navigate(dashboardRouteName);
+      return;
     }
   }, [state.success]);
 
