@@ -1,6 +1,7 @@
 import { checkAuth } from "@app/global/auth/authenticationSlice";
 import { User } from "@domain/base/user/user";
 import { LoginResponse } from "@domain/entity/auth/login";
+import { routesName } from "@shared/routes/constants";
 
 import { Navigate, Outlet, To, useOutletContext } from "react-router-dom";
 
@@ -30,7 +31,7 @@ export default function PrivateLayout({
     !allowedRoles.includes(user.user.role?.name || "")
   ) {
     // User is not in one of the allowed roles
-    return <Navigate to="/unauthorized" replace />;
+    return <Navigate to={routesName.PRIVATE.UNAUTHORIZED} replace />;
   }
 
   return <Outlet context={{ user: user.user }} />;
