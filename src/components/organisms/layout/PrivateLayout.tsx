@@ -1,6 +1,7 @@
 import { checkAuth } from "@app/global/auth/authenticationSlice";
 import { User } from "@domain/base/user/user";
 import { LoginResponse } from "@domain/entity/auth/login";
+import BottomNavigation from "@moleculs/bottom_navigation/BottomNavigation";
 import { routesName } from "@shared/routes/constants";
 
 import { Navigate, Outlet, To, useOutletContext } from "react-router-dom";
@@ -17,7 +18,7 @@ export function useUser() {
 }
 
 export default function PrivateLayout({
-  redirectPath = "/login",
+  redirectPath = routesName.PUBLIC.LOGIN,
   allowedRoles = [],
 }: Props) {
   const user: LoginResponse | null = checkAuth();
@@ -34,5 +35,10 @@ export default function PrivateLayout({
     return <Navigate to={routesName.PRIVATE.UNAUTHORIZED} replace />;
   }
 
-  return <Outlet context={{ user: user.user }} />;
+  return (
+    <div className="relative h-screen">
+      <Outlet context={{ user: user.user }} />
+      <BottomNavigation />
+    </div>
+  );
 }

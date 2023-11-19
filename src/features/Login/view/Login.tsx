@@ -28,7 +28,9 @@ export const Login: FC = () => {
       return;
     }
     if (state.success) {
-      navigate(dashboardRouteName);
+      navigate(dashboardRouteName, {
+        replace: true,
+      });
       return;
     }
   }, [state.success]);
