@@ -5,7 +5,7 @@ import loginImage from "@assets/images/login.png";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
 import { AppDispatch } from "@app/store";
 import { login } from "../store/thunk";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { NavigateFunction, useLocation, useNavigate } from "react-router-dom";
 import { dashboardRouteName } from "@features/Dashboard/view/Dashboard";
 import Loading from "@atoms/loading";
 import { LoginResponse } from "@domain/entity/auth/login";
@@ -22,13 +22,16 @@ export const Login: FC = () => {
   const navigate: NavigateFunction = useNavigate();
   const user: LoginResponse | null = checkAuth();
 
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   useEffect(() => {
     if(user){
       navigate(dashboardRouteName);
       return;
     }
     if (state.success) {
-      navigate(dashboardRouteName, {
+      navigate(from, {
         replace: true,
       });
       return;
