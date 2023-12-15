@@ -1,20 +1,13 @@
-import {
-  Dashboard
-} from "@features/Dashboard/view/Dashboard";
+import ErrorRoute from "../errors";
+import AdminRoute from "./admin/AdminRoute";
 import OfficerRoute from "./officer/OfficerRoute";
-import PrivateLayout from "@organisms/layout/PrivateLayout";
-import { routesName } from "../constants";
+import BottomNavigation from "@moleculs/bottom_navigation/BottomNavigation";
 
 export default function PrivateRoute() {
-  const { DASHBOARD } = routesName.PRIVATE;
-
   return [
     {
-      element: <PrivateLayout />,
-      children: [
-        { path: DASHBOARD, element: <Dashboard /> },
-      ],
+      element: <BottomNavigation />,
+      children: [...ErrorRoute(), ...OfficerRoute(), ...AdminRoute()],
     },
-    ...OfficerRoute(),
   ];
 }

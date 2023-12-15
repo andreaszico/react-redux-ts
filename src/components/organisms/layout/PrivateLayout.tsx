@@ -1,10 +1,10 @@
 import { checkAuth } from "@app/global/auth/authenticationSlice";
 import { User } from "@domain/base/user/user";
 import { LoginResponse } from "@domain/entity/auth/login";
-import BottomNavigation from "@moleculs/bottom_navigation/BottomNavigation";
 import { routesName } from "@shared/routes/constants";
+import { useEffect } from "react";
 
-import { Navigate, Outlet, To, useOutletContext } from "react-router-dom";
+import { Outlet, To, useNavigate, useOutletContext } from "react-router-dom";
 
 interface Props {
   redirectPath?: To;
@@ -22,23 +22,34 @@ export default function PrivateLayout({
   allowedRoles = [],
 }: Props) {
   const user: LoginResponse | null = checkAuth();
+  const navigate = useNavigate();
 
-  if (!user) {
-    return <Navigate to={redirectPath} replace />;
-  }
-
-  if (
-    allowedRoles.length > 0 &&
-    !allowedRoles.includes(user.user.role?.name || "")
-  ) {
-    // User is not in one of the allowed roles
-    return <Navigate to={routesName.PRIVATE.UNAUTHORIZED} replace />;
-  }
+  useEffect(() => {
+    if (!user) {
+      navigate(redirectPath, {
+        replace: true,
+        state: { key: "value" },
+      });
+      return;
+    }
+    if (
+      allowedRoles.length > 0 &&
+      !allowedRoles.includes(user.user.role?.name || "")
+    ) {
+      const roles = allowedRoles.map((el) =>
+        el.split("_").join(" ").toLocaleUpperCase()
+      );
+      navigate(routesName.ERROR.UNAUTHORIZED, {
+        replace: true,
+        state: { roles: roles },
+      });
+      return;
+    }
+  }, []);
 
   return (
-    <div className="relative h-screen">
-      <Outlet context={{ user: user.user }} />
-      <BottomNavigation />
+    <div>
+      <Outlet context={{ user: user?.user }} />
     </div>
   );
 }

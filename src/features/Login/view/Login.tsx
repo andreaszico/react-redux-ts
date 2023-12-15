@@ -10,6 +10,7 @@ import { dashboardRouteName } from "@features/Dashboard/view/Dashboard";
 import Loading from "@atoms/loading";
 import { LoginResponse } from "@domain/entity/auth/login";
 import { checkAuth } from "@app/global/auth/authenticationSlice";
+import { routesName } from "@shared/routes/constants";
 
 export const loginRouteName = "/login";
 
@@ -26,8 +27,8 @@ export const Login: FC = () => {
   const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    if(user){
-      navigate(dashboardRouteName);
+    if (user) {
+      navigate(routesName.PRIVATE.OFFICER.OFFICER_INDEX);
       return;
     }
     if (state.success) {

@@ -1,22 +1,18 @@
 import { ROLES } from "@app/constants/roles";
+import OfficerDashboard from "@features/Officer/Dashboard/Dashboard";
 import PrivateLayout from "@organisms/layout/PrivateLayout";
 import { routesName } from "@shared/routes/constants";
 
 export default function OfficerRoute() {
-  const { OFFICER, DASHBOARD } = routesName.PRIVATE;
+  const { OFFICER } = routesName.PRIVATE;
 
   return [
     {
-      element: (
-        <PrivateLayout
-          allowedRoles={[ROLES.OfficerDistrict]}
-          redirectPath={DASHBOARD}
-        />
-      ),
+      element: <PrivateLayout allowedRoles={[ROLES.OfficerDistrict]} />,
       children: [
         {
           path: OFFICER.OFFICER_INDEX,
-          element: <h1>Private Officer</h1>,
+          element: <OfficerDashboard />,
         },
       ],
     },

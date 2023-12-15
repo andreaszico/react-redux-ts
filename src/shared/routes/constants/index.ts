@@ -3,11 +3,19 @@ export const routesName = {
     LOGIN: "/login",
     STORAGE: "/storage",
   },
+  ERROR: {
+    UNAUTHORIZED: "/unauthorized", // 403
+  },
   PRIVATE: {
-    DASHBOARD: '/dashboard',
-    UNAUTHORIZED: '/unauthorized',
+    DASHBOARD: "/dashboard",
     OFFICER: {
-        OFFICER_INDEX: '/admin/officer',
-    }
-  }
+      OFFICER_INDEX: "/officer",
+    },
+    ADMIN: {
+      DASHBOARD: "/admin/dashboard",
+      OFFICER: {
+        OFFICER_INDEX: "/admin/officer",
+      },
+    },
+  },
 };
