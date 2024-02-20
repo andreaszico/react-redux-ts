@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { appLogger } from "../shared/logger/logger";
 
 import authReducer from "./global/auth/authenticationSlice";
 
@@ -15,7 +14,7 @@ export const store = configureStore({
     loginScreenState: loginScreenReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(appLogger),
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
