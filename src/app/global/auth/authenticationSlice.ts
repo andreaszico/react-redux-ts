@@ -27,7 +27,7 @@ const Authentication = createSlice({
       .addCase(getInitialUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getInitialUser.rejected, (state, action) => {
+      .addCase(getInitialUser.rejected, (state) => {
         state.isLoading = false;
       })
       .addCase(getInitialUser.fulfilled, (state, action) => {

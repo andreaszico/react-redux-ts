@@ -1,5 +1,4 @@
-import { LoginRequest } from "@domain/entity/auth/login";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { login } from "./thunk";
 import { AxiosError } from "axios";
 import ZStorage from "@shared/utils/z_storage";
@@ -20,7 +19,7 @@ const loginScreen = createSlice({
   name: "login_screen",
   initialState,
   reducers: {
-    onNextStage: (state, action: PayloadAction<LoginRequest>) => {},
+    // onNextStage: (state, action: PayloadAction<LoginRequest>) => {},
   },
   extraReducers: (builder) => {
     builder
@@ -43,6 +42,6 @@ async function setToStorage(data: any) {
   ZStorage.setItem(ZStorage.accessTokenKey, JSON.stringify(data));
 }
 
-export const { onNextStage } = loginScreen.actions;
+// export const { onNextStage } = loginScreen.actions;
 
 export default loginScreen.reducer;

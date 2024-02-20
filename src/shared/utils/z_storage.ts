@@ -31,7 +31,6 @@ class ZStorage {
     try {
       const encrypt = StringEncryptor.encrypt(value);
       localStorage.setItem(item, encrypt);
-
     } catch (error) {
       console.error("Error setting item in localStorage:", error);
     }
