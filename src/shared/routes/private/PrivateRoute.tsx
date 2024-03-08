@@ -7,7 +7,19 @@ export default function PrivateRoute() {
   return [
     {
       element: <BottomNavigation />,
-      children: [...ErrorRoute(), ...OfficerRoute(), ...AdminRoute()],
+      children: [
+        ...ErrorRoute(),
+        ...OfficerRoute(),
+        ...AdminRoute(),
+        {
+          path: "/test0",
+          element: <h1>Test 0</h1>,
+        },
+        {
+          path: "/test1",
+          element: <h1>Test 1</h1>,
+        },
+      ],
     },
   ];
 }

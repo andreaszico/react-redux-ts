@@ -1,5 +1,13 @@
+import { useUser } from "@organisms/layout/PrivateLayout";
+
 function OfficerDashboard() {
-  return <div>Dashboard Officer</div>;
+  const { user } = useUser();
+
+  return (
+    <div>
+      Dashboard {user?.role?.name} {user?.role?.id}
+    </div>
+  );
 }
 
 export default OfficerDashboard;

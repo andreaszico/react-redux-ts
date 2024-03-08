@@ -3,6 +3,7 @@ import { getInitialUser } from "./thunk";
 import { User } from "@domain/base/user/user";
 import ZStorage from "@shared/utils/z_storage";
 import { LoginResponse } from "@domain/entity/auth/login";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface AuthenticationState {
   isLoading: boolean;
@@ -21,7 +22,11 @@ const initialState: AuthenticationState = {
 const Authentication = createSlice({
   name: "authentication",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser(state, action: PayloadAction<User | null>) {
+      state.user = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getInitialUser.pending, (state) => {
@@ -41,6 +46,6 @@ export const checkAuth = (): LoginResponse | null => {
   return user ? user : null;
 };
 
-export const {} = Authentication.actions;
+export const { setUser } = Authentication.actions;
 
 export default Authentication.reducer;
