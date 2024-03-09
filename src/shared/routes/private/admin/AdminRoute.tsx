@@ -8,7 +8,7 @@ export default function AdminRoute() {
 
   return [
     {
-      element: <PrivateLayout allowedRoles={[ROLES.SuperAdmin, ROLES.Admin]} />,
+      element: <PrivateLayout allowedRoles={[ROLES.Pemungut, ROLES.Admin]} />,
       children: [
         {
           path: ADMIN.OFFICER.OFFICER_INDEX,
