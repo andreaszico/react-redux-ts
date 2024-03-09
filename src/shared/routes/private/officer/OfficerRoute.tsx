@@ -8,7 +8,9 @@ export default function OfficerRoute() {
 
   return [
     {
-      element: <PrivateLayout allowedRoles={[ROLES.OfficerDistrict]} />,
+      element: (
+        <PrivateLayout allowedRoles={[ROLES.OfficerDistrict, ROLES.Pemungut]} />
+      ),
       children: [
         {
           path: OFFICER.OFFICER_INDEX,

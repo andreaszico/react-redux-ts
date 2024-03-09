@@ -17,10 +17,10 @@ export function handleNavigator({ id }: { id: number }): string {
   let route: string = "";
   switch (id) {
     case 1:
-      route = "/test0";
+      route = routesName.PRIVATE.OFFICER.OFFICER_INDEX;
       break;
     case 2:
-      route = "/test1";
+      route = routesName.PRIVATE.OFFICER.OFFICER_INDEX;
       break;
     case 3:
       route = routesName.PRIVATE.OFFICER.OFFICER_INDEX;

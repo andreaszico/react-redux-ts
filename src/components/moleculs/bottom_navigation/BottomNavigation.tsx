@@ -1,16 +1,19 @@
-import ButtonNavigationList from "@app/constants/button_navigations";
+import { ButtonNavigationRoles } from "@app/constants/button_navigations";
+import { ROLES } from "@app/constants/roles";
 import ButtonIcon from "@atoms/buttons/button_icon/ButtonIcon";
-import { Outlet } from "react-router-dom";
 
-function BottomNavigation() {
+interface BottomNavigationInterface {
+  userRole: ROLES;
+}
+
+function BottomNavigation({ userRole }: BottomNavigationInterface) {
+  const adminNavigators = ButtonNavigationRoles[userRole];
+
   return (
-    <div className="relative h-screen">
-      <Outlet />
-      <div className="border rounded-md w-full absolute bottom-0 left-0 p-3 px-4 flex justify-between shadow-inner">
-        {ButtonNavigationList.map((el, i) => (
-          <ButtonIcon key={i} icons={el.icons} name={el.name} />
-        ))}
-      </div>
+    <div className="border rounded-md w-full absolute bottom-0 left-0 p-3 px-4 flex justify-between shadow-inner">
+      {adminNavigators.map((el, i) => (
+        <ButtonIcon key={i} icons={el.icons} name={el.name} />
+      ))}
     </div>
   );
 }
