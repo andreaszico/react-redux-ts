@@ -8,6 +8,7 @@ export const routesName = {
   },
   PRIVATE: {
     DASHBOARD: "/dashboard",
+    PROFILE: "/profile",
     OFFICER: {
       OFFICER_INDEX: "/officer",
     },

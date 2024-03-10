@@ -5,15 +5,19 @@ import { MdHistory } from "react-icons/md";
 import { IoPersonSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
 import { ROLES } from "./roles";
+import { routesName } from "@shared/routes/constants";
 
 export interface ButtonNavigationInterface {
   icons: IconType;
   name: string;
+  href?: string;
 }
 
 export type ButtonNavigatorRoles = {
   [key in ROLES]: ButtonNavigationInterface[];
 };
+
+const { PROFILE } = routesName.PRIVATE;
 
 const ButtonNavigationList: ButtonNavigationInterface[] = [
   {
@@ -35,6 +39,7 @@ const ButtonNavigationList: ButtonNavigationInterface[] = [
   {
     icons: IoPersonSharp,
     name: "Profile",
+    href: PROFILE,
   },
 ];
 
@@ -58,6 +63,7 @@ const ButtonNavigationPetugas: ButtonNavigationInterface[] = [
   {
     icons: IoPersonSharp,
     name: "Profile",
+    href: PROFILE,
   },
 ];
 

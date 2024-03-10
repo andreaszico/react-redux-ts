@@ -10,9 +10,9 @@ function BottomNavigation({ userRole }: BottomNavigationInterface) {
   const adminNavigators = ButtonNavigationRoles[userRole];
 
   return (
-    <div className="border rounded-md w-full absolute bottom-0 left-0 p-3 px-4 flex justify-between shadow-inner">
+    <div className="border rounded-md w-full fixed bottom-0 left-0 p-3 px-4 flex justify-between shadow-inner">
       {adminNavigators.map((el, i) => (
-        <ButtonIcon key={i} icons={el.icons} name={el.name} />
+        <ButtonIcon key={i} icons={el.icons} name={el.name} href={el.href} />
       ))}
     </div>
   );
