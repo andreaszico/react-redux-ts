@@ -5,16 +5,18 @@ import { RouterProvider } from "react-router-dom";
 import { routers } from "./shared/routes/routes.tsx";
 import { Provider } from "react-redux";
 import { store } from "./app/store.ts";
+import React from "react";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 console.time("test_timer");
 
 root.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <RouterProvider router={routers} />
-  </Provider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={routers} />
+    </Provider>
+    //{" "}
+  </React.StrictMode>
 );
 
 console.timeEnd("test_timer");

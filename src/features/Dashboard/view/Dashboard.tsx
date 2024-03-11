@@ -1,6 +1,6 @@
 import "@app/global/extension/string/string-extensions";
 import { useAppSelector } from "@app/hooks";
-import { useUser } from "@organisms/layout/PrivateLayout";
+import { useUser } from "@organisms/layout/WrapperLayout";
 import { FC, useEffect } from "react";
 
 export const dashboardRouteName = "/dashboard";

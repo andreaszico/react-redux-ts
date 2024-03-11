@@ -1,42 +1,22 @@
-import { checkAuth } from "@app/global/auth/authenticationSlice";
-import { User } from "@domain/base/user/user";
-import { LoginResponse } from "@domain/entity/auth/login";
 import { routesName } from "@shared/routes/constants";
 import { useEffect } from "react";
-import BottomNavigation from "@moleculs/bottom_navigation/BottomNavigation";
 
-import { Outlet, To, useNavigate, useOutletContext } from "react-router-dom";
-import { ROLES } from "@app/constants/roles";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useUser } from "./WrapperLayout";
 
 interface Props {
-  redirectPath?: To;
   allowedRoles?: string[];
+  children?: string | JSX.Element | JSX.Element[];
 }
 
-type OutletContextType = { user: User | null };
-
-export function useUser() {
-  return useOutletContext<OutletContextType>();
-}
-
-export default function PrivateLayout({
-  redirectPath = routesName.PUBLIC.LOGIN,
-  allowedRoles = [],
-}: Props) {
-  const data: LoginResponse | null = checkAuth();
+export default function PrivateLayout({ allowedRoles = [] }: Props) {
+  const { user } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!data) {
-      navigate(redirectPath, {
-        replace: true,
-        state: { key: "value" },
-      });
-      return;
-    }
     if (
       allowedRoles.length > 0 &&
-      !allowedRoles.includes(data.user.role?.name || "")
+      !allowedRoles.includes(user?.role?.name || "")
     ) {
       const roles = allowedRoles.map((el) =>
         el.split("_").join(" ").toLocaleUpperCase()
@@ -51,10 +31,7 @@ export default function PrivateLayout({
 
   return (
     <div className="relative h-screen">
-      <Outlet context={{ user: data?.user }} />
-      <BottomNavigation
-        userRole={(data?.user.role?.name as ROLES) ?? ROLES.Admin}
-      />
+      <Outlet context={{ user: user }} />
     </div>
   );
 }

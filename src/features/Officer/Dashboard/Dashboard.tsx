@@ -1,4 +1,4 @@
-import { useUser } from "@organisms/layout/PrivateLayout";
+import { useUser } from "@organisms/layout/WrapperLayout";
 
 function OfficerDashboard() {
   const { user } = useUser();
