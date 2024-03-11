@@ -3,6 +3,8 @@ import { useEffect } from "react";
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { useUser } from "./WrapperLayout";
+import BottomNavigation from "@moleculs/bottom_navigation/BottomNavigation";
+import { ROLES } from "@app/constants/roles";
 
 interface Props {
   allowedRoles?: string[];
@@ -32,6 +34,7 @@ export default function PrivateLayout({ allowedRoles = [] }: Props) {
   return (
     <div className="relative h-screen">
       <Outlet context={{ user: user }} />
+      <BottomNavigation userRole={(user?.role?.name as ROLES) ?? ROLES.Admin} />
     </div>
   );
 }
